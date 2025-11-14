@@ -64,8 +64,16 @@ The yield* keyword forwards all values from the periodic stream so the function 
 * Step 2 defines the transformer's logic: multiply good numbers by 10 and convert any errors into the number -1.
 * Step 3 applies the transformer to the stream, so the UI's listener now receives the modified (multiplied or error) data.
 
-
 <p align="center">
   <img src="img\q8.gif" width="250" alt="1" />
 </p> 
 
+## Practical 4 : Subscribe to stream events
+### Question 9 
+* Step 2 initState() prepares the stream so the app can receive and display numbers in real time.
+* Step 6 Stops the data flow and disables the stream so no more numbers will be received.
+* addRandomNumber() sends a new random number into the stream so it appears on the screen.
+
+<p align="center">
+  <img src="img\q9.gif" width="250" alt="1" />
+</p> 

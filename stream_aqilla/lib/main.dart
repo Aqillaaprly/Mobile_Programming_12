@@ -36,6 +36,7 @@ class _StreamHomePageState extends State<StreamHomePage> {
   int lastNumber = 0;
   late StreamController<int> numberStreamController;
   late NumberStream numberStream;
+  late StreamSubscription subscription;
 
   @override
   void initState() {
@@ -47,33 +48,39 @@ class _StreamHomePageState extends State<StreamHomePage> {
     numberStream = NumberStream();
     numberStreamController = numberStream.controller;
 
-    final transformer = StreamTransformer<int, int>.fromHandlers(
-      handleData: (value, sink) {
-        sink.add(value * 10);  
+    subscription = numberStreamController.stream.listen(
+      (event) {
+        setState(() {
+          lastNumber = event;
+        });
       },
-      handleError: (error, trace, sink) {
-        sink.add(-1);         
+      onError: (error) {
+        setState(() {
+          lastNumber = -1;
+        });
       },
-      handleDone: (sink) => sink.close(),
+      onDone: () {
+        print("Stream closed");
+      },
     );
+  }
 
-    numberStreamController.stream
-        .transform(transformer)
-        .listen((event) {
-      setState(() {
-        lastNumber = event;
-      });
-    }, onError: (error) {
-      setState(() {
-        lastNumber = -1;
-      });
-    });
+  void stopStream() {
+    subscription.cancel();  
+    numberStreamController.close(); 
   }
 
   void addRandomNumber() {
-    final random = Random();
-    int newNumber = random.nextInt(10);
-    numberStream.addNumber(newNumber);
+    Random random = Random();
+    int randomNum = random.nextInt(10);
+
+    if (!numberStreamController.isClosed) {
+      numberStream.addNumberToSink(randomNum);
+    } else {
+      setState(() {
+        lastNumber = -1;
+      });
+    }
   }
 
   void changeColor() {
@@ -82,6 +89,13 @@ class _StreamHomePageState extends State<StreamHomePage> {
         bgColor = event;
       });
     });
+  }
+
+  @override
+  void dispose() {
+    subscription.cancel();
+    numberStreamController.close();
+    super.dispose();
   }
 
   @override
@@ -105,15 +119,13 @@ class _StreamHomePageState extends State<StreamHomePage> {
               onPressed: addRandomNumber,
               child: const Text('New Random Number'),
             ),
+            ElevatedButton(
+              onPressed: stopStream, // <--- FIXED
+              child: const Text('Stop Subscription'),
+            ),
           ],
         ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    numberStreamController.close();
-    super.dispose();
   }
 }
