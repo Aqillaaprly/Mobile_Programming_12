@@ -1,16 +1,28 @@
-# stream_aqilla
+# PRACTICUM 12 
+## Practical 1 : Dart Streams
 
-A new Flutter project.
+### Question 1 
+<p align="center">
+  <img src="img\q1.png" width="250" alt="1" />
+</p> 
 
-## Getting Started
+### Question 2
+<p align="center">
+  <img src="img\q2.png" width="250" alt="1" />
+</p> 
 
-This project is a starting point for a Flutter application.
+### Question 3 
+<p align="center">
+  <img src="img\q3.png" width="250" alt="1" />
+</p> 
 
-A few resources to get you started if this is your first Flutter project:
+**Explanation of yield**
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+The keyword yield* is used in an async* function to emit (forward) all values from another stream into the current stream. Instead of sending one value at a time, yield* passes every event produced by another stream.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+**Explanation of the Code**
+
+The function getColors() returns a stream of colors.
+It uses Stream.periodic to generate a new color every 1 second.
+The index t % colors.length ensures the colors loop repeatedly.
+The yield* keyword forwards all values from the periodic stream so the function outputs each generated color as its own stream event.
