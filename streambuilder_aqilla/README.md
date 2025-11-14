@@ -1,16 +1,10 @@
-# streambuilder_aqilla
+# Practicum 12 : Stream
+## Practical 6 : StreamBuilder
+### Question 13
+**Explain what is in step 3 and 7!**
+ * Step 3 creates a stream that emits a new random number (0-9) every single second, indefinitely.
+ * Step 7 tells the app to listen to the number stream. Every time a new random number arrives (once per second), the StreamBuilder automatically rebuilds the Text widget to show that new number.
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<p align="center">
+  <img src="img\q12.gif" width="250" alt="1" />
+</p> 
