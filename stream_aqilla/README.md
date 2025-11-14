@@ -46,7 +46,7 @@ The yield* keyword forwards all values from the periodic stream so the function 
 * Step 8 sets up both the color stream and the number stream so the UI can update automatically when new data arrives. 
 * Step 10 generates a random number and sends it to the stream, causing the displayed number to update.
 <p align="center">
-  <img src="img\q6.gif" width="250" alt="1" />
+  <img src="img\q6.1.gif" width="250" alt="1" />
 </p> 
 
 ### Question 7 
@@ -56,3 +56,16 @@ The yield* keyword forwards all values from the periodic stream so the function 
 <p align="center">
   <img src="img\q7.gif" width="250" alt="1" />
 </p> 
+
+## Practical 3 : Injecting data into streams
+### Question 8 
+**Explain the meaning of the code steps 1-3!**
+* Step 1 declares a placeholder variable that will hold the stream transformer's rules.
+* Step 2 defines the transformer's logic: multiply good numbers by 10 and convert any errors into the number -1.
+* Step 3 applies the transformer to the stream, so the UI's listener now receives the modified (multiplied or error) data.
+
+
+<p align="center">
+  <img src="img\q8.gif" width="250" alt="1" />
+</p> 
+

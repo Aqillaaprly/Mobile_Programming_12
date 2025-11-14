@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Stream Aqilla Aprily - 2341720068',
+      title: 'Stream - Aqilla Aprily',
       theme: ThemeData(
         primarySwatch: Colors.amber,
       ),
@@ -40,43 +40,48 @@ class _StreamHomePageState extends State<StreamHomePage> {
   @override
   void initState() {
     super.initState();
+
     colorStream = ColorStream();
     changeColor();
+
     numberStream = NumberStream();
     numberStreamController = numberStream.controller;
-    numberStreamController.stream.listen(
-      (event) {
-        setState(() {
-          lastNumber = event;
-        });
+
+    final transformer = StreamTransformer<int, int>.fromHandlers(
+      handleData: (value, sink) {
+        sink.add(value * 10);  
       },
-      onError: (err) {
-        setState(() {
-          lastNumber = -1;
-        });
+      handleError: (error, trace, sink) {
+        sink.add(-1);         
       },
+      handleDone: (sink) => sink.close(),
     );
+
+    numberStreamController.stream
+        .transform(transformer)
+        .listen((event) {
+      setState(() {
+        lastNumber = event;
+      });
+    }, onError: (error) {
+      setState(() {
+        lastNumber = -1;
+      });
+    });
   }
 
   void addRandomNumber() {
     final random = Random();
-    int newNumber = random.nextInt(100);
+    int newNumber = random.nextInt(10);
     numberStream.addNumber(newNumber);
   }
 
   void changeColor() {
-    colorStream.getColors().listen(
-      (event) {
-        setState(() {
-          bgColor = event;
-        });
-      },
-      onError: (error) {
-        setState(() {
-          lastNumber = -1;
-        });
-      },
-    );
+    colorStream.getColors().listen((event) {
+      setState(() {
+        bgColor = event;
+      });
+    });
   }
 
   @override
@@ -94,10 +99,7 @@ class _StreamHomePageState extends State<StreamHomePage> {
           children: [
             Text(
               lastNumber.toString(),
-              style: const TextStyle(
-                fontSize: 40,
-                fontWeight: FontWeight.bold,
-              ),
+              style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
             ),
             ElevatedButton(
               onPressed: addRandomNumber,
