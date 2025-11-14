@@ -38,6 +38,9 @@ class _StreamHomePageState extends State<StreamHomePage> {
   late NumberStream numberStream;
   late StreamSubscription subscription;
 
+  late StreamSubscription subscription2;
+  String values = '';
+
   @override
   void initState() {
     super.initState();
@@ -48,26 +51,25 @@ class _StreamHomePageState extends State<StreamHomePage> {
     numberStream = NumberStream();
     numberStreamController = numberStream.controller;
 
-    subscription = numberStreamController.stream.listen(
-      (event) {
-        setState(() {
-          lastNumber = event;
-        });
-      },
-      onError: (error) {
-        setState(() {
-          lastNumber = -1;
-        });
-      },
-      onDone: () {
-        print("Stream closed");
-      },
-    );
+    Stream stream = numberStreamController.stream.asBroadcastStream();
+
+    subscription = stream.listen((event) {
+      setState(() {
+        values += '$event - ';
+      });
+    });
+
+    subscription2 = stream.listen((event) {
+      setState(() {
+        values += '$event - ';
+      });
+    });
   }
 
   void stopStream() {
-    subscription.cancel();  
-    numberStreamController.close(); 
+    subscription.cancel();
+    subscription2.cancel();
+    numberStreamController.close();
   }
 
   void addRandomNumber() {
@@ -94,6 +96,7 @@ class _StreamHomePageState extends State<StreamHomePage> {
   @override
   void dispose() {
     subscription.cancel();
+    subscription2.cancel();
     numberStreamController.close();
     super.dispose();
   }
@@ -112,7 +115,7 @@ class _StreamHomePageState extends State<StreamHomePage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              lastNumber.toString(),
+              values,
               style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
             ),
             ElevatedButton(
@@ -120,7 +123,7 @@ class _StreamHomePageState extends State<StreamHomePage> {
               child: const Text('New Random Number'),
             ),
             ElevatedButton(
-              onPressed: stopStream, // <--- FIXED
+              onPressed: stopStream,
               child: const Text('Stop Subscription'),
             ),
           ],

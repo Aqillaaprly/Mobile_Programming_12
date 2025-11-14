@@ -77,3 +77,25 @@ The yield* keyword forwards all values from the periodic stream so the function 
 <p align="center">
   <img src="img\q9.gif" width="250" alt="1" />
 </p> 
+
+## Practical 5 : Multiple stream subscriptions
+### Question 10 
+**Explain why this error could occur?**
+
+That error means we try to listen to a stream that only allows **one listener**.
+
+By default, a stream is for a single subscription. Our code tried to attach **two** listeners (`subscription` and `subscription2`) to that one stream, which caused the "already been listened to" error.
+The fix (from Step 4) is to use `.asBroadcastStream()`, which turns it into a stream that **does** allow multiple listeners.
+
+<p align="center">
+  <img src="img\q10.jpg.jpeg" width="250" alt="1" />
+</p> 
+
+### Question 11
+**Explain why this could happen?**
+
+The number text increases by two times because there are two active listeners. Both listeners react to the same single event and both perform the same action (appending the number to the values string), causing the duplication seen in the UI.
+
+<p align="center">
+  <img src="img\q11.gif" width="250" alt="1" />
+</p> 
