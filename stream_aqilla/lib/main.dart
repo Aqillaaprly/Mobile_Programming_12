@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
+import 'dart:math';
 import 'stream.dart';
 
 void main() {
@@ -28,32 +30,88 @@ class StreamHomePage extends StatefulWidget {
 }
 
 class _StreamHomePageState extends State<StreamHomePage> {
+  Color bgColor = Colors.blueGrey;
+  late ColorStream colorStream;
+
+  int lastNumber = 0;
+  late StreamController<int> numberStreamController;
+  late NumberStream numberStream;
+
+  @override
+  void initState() {
+    super.initState();
+    colorStream = ColorStream();
+    changeColor();
+    numberStream = NumberStream();
+    numberStreamController = numberStream.controller;
+    numberStreamController.stream.listen(
+      (event) {
+        setState(() {
+          lastNumber = event;
+        });
+      },
+      onError: (err) {
+        setState(() {
+          lastNumber = -1;
+        });
+      },
+    );
+  }
+
+  void addRandomNumber() {
+    final random = Random();
+    int newNumber = random.nextInt(100);
+    numberStream.addNumber(newNumber);
+  }
+
+  void changeColor() {
+    colorStream.getColors().listen(
+      (event) {
+        setState(() {
+          bgColor = event;
+        });
+      },
+      onError: (error) {
+        setState(() {
+          lastNumber = -1;
+        });
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Stream- Aqilla Aprily'),
+        title: const Text('Stream - Aqilla Aprily'),
       ),
       body: Container(
-        decoration: BoxDecoration(color: bgColor),
+        width: double.infinity,
+        color: bgColor,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              lastNumber.toString(),
+              style: const TextStyle(
+                fontSize: 40,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            ElevatedButton(
+              onPressed: addRandomNumber,
+              child: const Text('New Random Number'),
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  Color bgColor = Colors.blueGrey;
-  late ColorStream colorStream;
-
- void changeColor() async {
-  colorStream.getColors().listen((eventColor) {
-    setState(() {
-      bgColor = eventColor;
-    });
-  });
-}
-
   @override
-  void initState(){
-    colorStream = ColorStream();
-    changeColor();
-  }   
+  void dispose() {
+    numberStreamController.close();
+    super.dispose();
+  }
 }

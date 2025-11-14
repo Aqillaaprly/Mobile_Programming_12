@@ -1,26 +1,32 @@
+import 'dart:async';
+import 'dart:math';
 import 'package:flutter/material.dart';
 
-class ColorStream{
+// STREAM UNTUK NUMBER
+class NumberStream {
+  final controller = StreamController<int>();
 
-  final List<Color> colors = [
-    Colors.blueGrey,
-    Colors.amber,
-    Colors.deepPurple,
-    Colors.lightBlue,
-    Colors.teal,
-    Colors.lightGreen,
-    Colors.pink,
-    Colors.blueAccent,
-    Colors.cyan,
-    Colors.purple
-  ];
+  void addNumber(int number) {
+    controller.sink.add(number);
+  }
 
-  Stream<Color> getColors() async*{
-    yield* Stream.periodic(
-      const Duration(seconds: 1), (int t){
-        int index = t % colors.length;
-        return colors[index];
-      }
-    );
+  void addError() {
+    controller.sink.addError("Terjadi Error");
+  }
+}
+
+// STREAM UNTUK COLOR
+class ColorStream {
+  Stream<Color> getColors() async* {
+    final random = Random();
+    while (true) {
+      await Future.delayed(const Duration(seconds: 1));
+      yield Color.fromRGBO(
+        random.nextInt(256),
+        random.nextInt(256),
+        random.nextInt(256),
+        1,
+      );
+    }
   }
 }

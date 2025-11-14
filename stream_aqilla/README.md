@@ -39,3 +39,20 @@ The yield* keyword forwards all values from the periodic stream so the function 
 
 * listen() uses a callback and allows the program to continue running while listening to stream events.
 * await for waits for each event in sequence, making the function process stream values one at a time like a loop.
+
+## Practical 2 : Stream controllers and sinks
+### Question 6 
+**Explain the meaning of the code steps 8 and 10!**
+* Step 8 sets up both the color stream and the number stream so the UI can update automatically when new data arrives. 
+* Step 10 generates a random number and sends it to the stream, causing the displayed number to update.
+<p align="center">
+  <img src="img\q6.gif" width="250" alt="1" />
+</p> 
+
+### Question 7 
+**Explain the meaning of the code steps 13 to 15!**
+* Step 13 creates a method that can intentionally trigger an error in the stream.
+* Step 15 changes the button so it sends an error to the stream instead of a number.
+<p align="center">
+  <img src="img\q7.gif" width="250" alt="1" />
+</p> 
