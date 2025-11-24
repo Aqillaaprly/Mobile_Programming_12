@@ -1,16 +1,63 @@
-# store_data_aqilla
+# PRACTICUM 13 
+## Practical 1 : Converting Dart model to JSON 
 
-A new Flutter project.
+### Question 1 
+<p align="center">
+  <img src="img\q1.png" width="250" alt="1" />
+</p> 
 
-## Getting Started
+### Question 2
+<p align="center">
+  <img src="img\q2.jpeg" width="250" alt="1" />
+</p> 
 
-This project is a starting point for a Flutter application.
+### Question 3
+<p align="center">
+  <img src="img\q3.jpeg" width="250" alt="1" />
+</p> 
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Practical 2 : Handle JSOn data compatibility 
+### Question 4
+<p align="center">
+  <img src="img\q4.jpeg" width="250" alt="1" />
+</p> 
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Practical 3 : Handling JSON errors 
+### Question 5
+**Safer Code**
+The code is safer because it checks and validates incoming input, manages null cases, prevents unexpected application failures, and properly handles parsing issues. This helps the app stay stable even when it receives incomplete or invalid information.
+
+**More Maintainable Code**
+The code is easier to maintain thanks to its well-organized structure, clear naming, and separation of responsibilities. Other developers can quickly understand, modify, or enhance the code without risking unintended impacts on other components.
+<p align="center">
+  <img src="img\q4.jpeg" width="250" alt="1" />
+</p> 
+
+
+## Practical 4 : Shared Preferences
+### Question 6
+<p align="center">
+  <img src="img\q6.gif" width="250" alt="1" />
+</p> 
+
+## Practical 5 : Acces the filesystem with path_privider
+### Question 7
+<p align="center">
+  <img src="img\q7.jpeg" width="250" alt="1" />
+</p> 
+
+## Practical 6 : Accessing the filesystem with directories 
+### Question 8 
+**Explain the meaning of the code in steps 3 and 7!** 
+The writeFile() function stores text in a file using writeAsString(), and because it uses await, the file-writing process finishes before any remaining code runs. If the operation succeeds, it returns true, while any errors are safely handled in the catch block, preventing crashes and returning false. In Step 7, when the Read File button is pressed, the app reads the saved file and displays the contents, including the user's name, student ID (NIM), and the pizza menu.
+
+<p align="center">
+  <img src="img\q8.gif" width="250" alt="1" />
+</p> 
+
+## Practical 7 : Storing data with encryption/descryption 
+### Question 9
+<p align="center">
+  <img src="img\q9.gif" width="250" alt="1" />
+</p> 
