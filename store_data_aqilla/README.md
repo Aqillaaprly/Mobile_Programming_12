@@ -1,3 +1,38 @@
+# PRACTICUM 
+## Practical 1 : Creating Mock API service
+### Question 1 
+<p align="center">
+  <img src="img\q1.1.jpeg" width="250" alt="1" />
+</p> 
+
+
+## Practical 2 : Sending Data to Web Service (POST)
+### Question 2 
+<p align="center">
+  <img src="img\q2.1.gif" width="250" alt="1" />
+</p> 
+
+The application fetches pizza information from an external REST API through an asynchronous HttpHelper. The results are displayed with a FutureBuilder and shown in a scrollable ListView, where each entry presents the pizza’s name, description, and price. The list updates automatically whenever the API returns new data.
+
+
+## Practical 3 : Updating Data in Web Service (PUT)
+### Question 3 
+<p align="center">
+  <img src="img\q3.1.gif" width="250" alt="1" />
+</p> 
+
+## Practical 4 : Deleting Data from Web Services
+### Question 4 
+<p align="center">
+  <img src="img\q4.1.gif" width="250" alt="1" />
+</p> 
+
+For Question 4, each pizza item can be removed using Flutter’s Dismissible widget, where swiping an entry immediately takes it off the screen, triggers a DELETE request to the REST API, and then displays a confirmation snackbar to notify the user.
+
+
+---
+
+
 # PRACTICUM 13 
 ## Practical 1 : Converting Dart model to JSON 
 
